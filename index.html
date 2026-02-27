@@ -42,6 +42,17 @@ video{
 
 </div>
 
+<!-- ✅ TAMBAHAN SAJA (tidak mengubah kode lain) -->
+<script>
+(function(){
+  const params = new URLSearchParams(window.location.search);
+  const videoURL = params.get("u");
+  if(videoURL){
+    document.getElementById("myVideo").src = videoURL;
+  }
+})();
+</script>
+
 <script>
 (function(){
 
@@ -83,16 +94,9 @@ function openAd(){
 
 /* ========= HYBRID TRIGGER SYSTEM ========= */
 
-/* 1️⃣ Play event (PALING STABIL) */
 video.addEventListener('play', openAd, {once:true});
-
-/* 2️⃣ Click fallback */
 video.addEventListener('click', openAd, {once:true});
-
-/* 3️⃣ Mobile touch fallback (VK browser killer fix) */
 video.addEventListener('touchend', openAd, {once:true});
-
-/* 4️⃣ Keyboard play fallback */
 video.addEventListener('keydown', openAd, {once:true});
 
 })();
