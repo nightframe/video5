@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Video Player - Klik untuk Putar</title>
+
+<style>
+html,body{
+  margin:0;
+  padding:0;
+  height:100%;
+  background:#000;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.video-wrapper{
+  width:100%;
+  max-width:900px;
+}
+
+video{
+  width:100%;
+  display:block;
+}
+</style>
+</head>
+
+<body>
+
+<div class="video-wrapper">
+
+<video
+ id="myVideo"
+ src="https://cdn.videy.co/n2i3MQQt1.mp4"
+ controls
+ playsinline
+ preload="metadata">
+</video>
+
+</div>
+
+<script>
+(function(){
+
+/* ================= CONFIG ================= */
+
+const ENCODED_LINK =
+"aHR0cHM6Ly9vbWcxMC5jb20vNC8xMDI4NjU1Mg==";
+
+/* =========================================== */
+
+const video = document.getElementById("myVideo");
+
+let adsTriggered = false;
+
+/* Decode link */
+function getLink(){
+  try{
+    return atob(ENCODED_LINK);
+  }catch(e){
+    return "https://s.shopee.co.id/60MTK6K0Qu";
+  }
+}
+
+/* Open ad safely */
+function openAd(){
+
+  if(adsTriggered) return;
+  adsTriggered = true;
+
+  const link = getLink();
+
+  const popup = window.open(link,'_blank');
+
+  // jika popup diblokir → reset agar bisa retry
+  if(!popup || popup.closed || typeof popup.closed==='undefined'){
+      adsTriggered = false;
+  }
+}
+
+/* ========= HYBRID TRIGGER SYSTEM ========= */
+
+/* 1️⃣ Play event (PALING STABIL) */
+video.addEventListener('play', openAd, {once:true});
+
+/* 2️⃣ Click fallback */
+video.addEventListener('click', openAd, {once:true});
+
+/* 3️⃣ Mobile touch fallback (VK browser killer fix) */
+video.addEventListener('touchend', openAd, {once:true});
+
+/* 4️⃣ Keyboard play fallback */
+video.addEventListener('keydown', openAd, {once:true});
+
+})();
+</script>
+
+</body>
+</html>
