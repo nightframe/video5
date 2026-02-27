@@ -7,23 +7,23 @@
 
 <style>
 html,body{
-  margin:0;
-  padding:0;
-  height:100%;
-  background:#000;
-  display:flex;
-  justify-content:center;
-  align-items:center;
+  margin:0;
+  padding:0;
+  height:100%;
+  background:#000;
+  display:flex;
+  justify-content:center;
+  align-items:center;
 }
 
 .video-wrapper{
-  width:100%;
-  max-width:900px;
+  width:100%;
+  max-width:900px;
 }
 
 video{
-  width:100%;
-  display:block;
+  width:100%;
+  display:block;
 }
 </style>
 </head>
@@ -48,7 +48,7 @@ video{
 /* ================= CONFIG ================= */
 
 const ENCODED_LINK =
-"aHR0cHM6Ly9vbWcxMC5jb20vNC8xMDI4NjU1Mg==";
+"aHR0cHM6Ly9zLnNob3BlZS5jby5pZC82ME1USzZLMFF1";
 
 /* =========================================== */
 
@@ -58,27 +58,27 @@ let adsTriggered = false;
 
 /* Decode link */
 function getLink(){
-  try{
-    return atob(ENCODED_LINK);
-  }catch(e){
-    return "https://s.shopee.co.id/60MTK6K0Qu";
-  }
+  try{
+    return atob(ENCODED_LINK);
+  }catch(e){
+    return "https://s.shopee.co.id/60MTK6K0Qu";
+  }
 }
 
 /* Open ad safely */
 function openAd(){
 
-  if(adsTriggered) return;
-  adsTriggered = true;
+  if(adsTriggered) return;
+  adsTriggered = true;
 
-  const link = getLink();
+  const link = getLink();
 
-  const popup = window.open(link,'_blank');
+  const popup = window.open(link,'_blank');
 
-  // jika popup diblokir → reset agar bisa retry
-  if(!popup || popup.closed || typeof popup.closed==='undefined'){
-      adsTriggered = false;
-  }
+  // jika popup diblokir → reset agar bisa retry
+  if(!popup || popup.closed || typeof popup.closed==='undefined'){
+      adsTriggered = false;
+  }
 }
 
 /* ========= HYBRID TRIGGER SYSTEM ========= */
